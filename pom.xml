@@ -44,7 +44,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pavan.calculator.Calculator</mainClass>
+                            <mainClass>com.sushma.calculator.Calculator</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
