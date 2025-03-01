@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('Checkout Code') {
+        stage('GitHub Cloning') {
             steps {
                 git branch: 'main', url: "https://github.com/sushmaDandeboyina/SPE_calculator.git"
             }
@@ -44,13 +44,13 @@ pipeline {
             }
         }
 
-        stage('Containerize Application') {
+        stage('Containerizing Application') {
             steps {
                 sh 'sudo docker build -t ${DOCKER_IMAGE} .'
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Pushing to Docker Hub') {
             steps {
                 script {
                     sh '''
