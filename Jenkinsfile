@@ -70,7 +70,7 @@ pipeline {
                     echo "[servers]" > hosts.ini
                     echo "${SERVER_IP} ansible_user=sushma ansible_ssh_private_key_file=${SSH_KEY_PATH}" >> hosts.ini
 
-                    echo "Running Ansible Playbook..."
+                    echo "Started Ansible Playbook..."
                     ansible-playbook -i hosts.ini deploy.yml
                     '''
                 }
@@ -80,10 +80,10 @@ pipeline {
 
     post {
         success {
-            echo "Pipeline executed successfully! The Scientific Calculator is deployed."
+            echo "ALL stages executed successfully! The Scientific Calculator is deployed."
         }
         failure {
-            echo "Pipeline failed! Check the logs for errors."
+            echo "Error! Check the logs for errors."
         }
     }
 }
