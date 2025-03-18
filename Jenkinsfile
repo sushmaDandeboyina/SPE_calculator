@@ -5,8 +5,6 @@ pipeline {
         MAVEN_HOME = "/usr/share/maven"
         PATH = "$PATH:$MAVEN_HOME/bin"
         DOCKER_IMAGE ="sushmadande/scientific-calculator"
-        DOCKER_USERNAME = "sushmadande"
-        DOCKER_PASSWORD = "123456789"
         SERVER_IP = "172.16.144.201"
         SSH_KEY_PATH = "/var/lib/jenkins/.ssh/id_rsa"
     }
@@ -52,10 +50,12 @@ pipeline {
 
         stage('Pushing to Docker Hub') {
             steps {
-                script {
+                withCredentials([usernamePassword(credentialsId: '7fe39d89-fc4a-4873-962b-1d82963d8668', 
+                                                  usernameVariable: 'DOCKER_USER', 
+                                                  passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo "Logging in to Docker Hub..."
-                    echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
+                    echo "Logging in to Docker Hub"
+                    echo "${DOCKER_PASS}" | sudo docker login -u "${DOCKER_USER}" --password-stdin
                     sudo docker push ${DOCKER_IMAGE}
                     '''
                 }
